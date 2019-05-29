@@ -24,5 +24,30 @@ namespace Sqlite
         {
             InitializeComponent();
         }
+
+        private void BtnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnSignIn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnAddNew_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EditMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
