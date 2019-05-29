@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SQLite;
 using System.Linq;
 using System.Text;
@@ -32,7 +33,23 @@ namespace Sqlite
         {
 
         }
+        private void FillDataGrid()
+        {
+            con.Open();
 
+            string q = "SELECT * From tblUsers";
+            DataSet dataSet = new DataSet();
+            SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter(q, con);
+            dataAdapter.Fill(dataSet);
+            dgViewDB.ItemsSource = dataSet.Tables[0].DefaultView;
+            con.Close();
+
+        }
+        private void Reset()
+        {
+            txtLogin.Clear();
+            txtPassword.Clear();
+        }
         private void BtnSignIn_Click(object sender, RoutedEventArgs e)
         {
 
