@@ -40,7 +40,27 @@ namespace Sqlite
 
         private void BtnAddNew_Click(object sender, RoutedEventArgs e)
         {
+            if (txtLogin.Text != "" && txtPassword.Password != "")
+            {
 
+                btnAddNew.Content = "Add new";
+
+                con.Open();
+                string Login = txtLogin.Text;
+                string pass = txtPassword.Password;
+                string hashed = BCrypt.HashPassword(pass, BCrypt.GenerateSalt(12));
+
+                string query = $"Insert into tblUsers(Login,Password) values('{Login}','{ hashed}')";
+                SQLiteCommand cmd = new SQLiteCommand(query, con);
+                cmd.ExecuteNonQuery();
+                con.Close();
+                FillDataGrid();
+                Reset();
+
+
+            }
+            else
+                MessageBox.Show("Fill in all the fields");
         }
 
         private void DeleteMenuItem_Click(object sender, RoutedEventArgs e)
