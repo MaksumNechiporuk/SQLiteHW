@@ -31,7 +31,26 @@ namespace Sqlite
 
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                con.Open();
+                SQLiteCommand cmd = new SQLiteCommand("UPDATE tblUsers Set Login=@Login Where Id=@Id", con);
+                cmd.Parameters.AddWithValue("Id", lblId.Content);
+                cmd.Parameters.AddWithValue("Login", txtLogin.Text);
+                btnAddNew.IsEnabled = true;
+                btnSignIn.IsEnabled = true;
+                cmd.ExecuteNonQuery();
+                con.Close();
+                MessageBox.Show("Record Update Successfully", "Updated", MessageBoxButton.OK);
+                FillDataGrid();
+                txtPassword.IsEnabled = true;
+                btnUpdate.IsEnabled = false;
+                Reset();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         private void FillDataGrid()
         {
@@ -82,7 +101,22 @@ namespace Sqlite
 
         private void DeleteMenuItem_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                DataRowView d = dgViewDB.SelectedItem as DataRowView;
 
+                SQLiteCommand cmd;
+                con.Open();
+
+                string query = $"Delete FROM tblUsers where Login='{d["Login"].ToString()}'";
+                cmd = new SQLiteCommand(query, con);
+                cmd.ExecuteNonQuery();
+                con.Close();
+                FillDataGrid();
+            }
+            catch
+            {
+            }
         }
 
         private void EditMenuItem_Click(object sender, RoutedEventArgs e)
