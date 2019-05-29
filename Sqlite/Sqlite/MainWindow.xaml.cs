@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,8 @@ namespace Sqlite
     /// </summary>
     public partial class MainWindow : Window
     {
+        SQLiteConnection con = new SQLiteConnection($"Data Source={"Users.sqlite"}");
+
         public MainWindow()
         {
             InitializeComponent();
