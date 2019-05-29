@@ -121,7 +121,14 @@ namespace Sqlite
 
         private void EditMenuItem_Click(object sender, RoutedEventArgs e)
         {
-
+            btnUpdate.IsEnabled = true;
+            txtLogin.IsEnabled = true;
+            txtPassword.IsEnabled = false;
+            DataRowView d = dgViewDB.SelectedItem as DataRowView;
+            lblId.Content = d["Id"].ToString();
+            txtLogin.Text = d["Login"].ToString();
+            btnAddNew.IsEnabled = false;
+            btnSignIn.IsEnabled = false;
         }
     }
 }
